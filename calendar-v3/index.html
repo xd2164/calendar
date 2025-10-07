@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdTech Events Calendar V3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calendar-container">
+        <!-- Header -->
+        <div class="calendar-header">
+            <h1>EdTech Events Calendar V3</h1>
+            <p class="subtitle">Key EdTech conferences, hyperscaler events, and AI-related workshops</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="calendar-navigation">
+            <button id="prevBtn">←</button>
+            <h2 class="month-year">January 2025</h2>
+            <button id="nextBtn">→</button>
+            <button id="todayBtn">Today</button>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button class="btn-toggle active" data-view="month">Month</button>
+            <button class="btn-toggle" data-view="week">Week</button>
+            <button class="btn-toggle" data-view="day">Day</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="calendar-main">
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <!-- Calendar content will be generated here -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="calendar-sidebar">
+                <div class="sidebar-section">
+                    <h3>Quick Actions</h3>
+                    <button id="addEventBtn">Add Event</button>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Today's Events</h3>
+                    <div id="todayEvents">No events today</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Upcoming Events</h3>
+                    <div id="upcomingEvents">No upcoming events</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Colleague Activity</h3>
+                    <div id="colleagueActivity">
+                        <div class="activity-summary">
+                            <div class="activity-item">
+                                <span class="activity-label">Total RSVPs:</span>
+                                <span class="activity-count" id="totalRSVPs">0</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Active Colleagues:</span>
+                                <span class="activity-count" id="activeColleagues">0</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Upcoming Events:</span>
+                                <span class="activity-count" id="upcomingWithRSVPs">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events List Section -->
+        <div class="events-list-section">
+            <div class="events-list-header">
+                <h2>All EdTech & Hyperscaler Events</h2>
+                <p>Complete list of conferences, hyperscaler events, workshops, and AI-related events</p>
+                <div class="list-controls">
+                    <select id="eventTypeFilter">
+                        <option value="all">All Event Types</option>
+                        <option value="conference">Conferences</option>
+                        <option value="summit">Summits</option>
+                        <option value="workshop">Workshops</option>
+                        <option value="symposium">Symposiums</option>
+                        <option value="research">Research</option>
+                        <option value="training">Training</option>
+                    </select>
+                    <select id="priorityFilter">
+                        <option value="all">All Priorities</option>
+                        <option value="high">High Priority</option>
+                        <option value="medium-high">Medium-High Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="medium-low">Medium-Low Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                    <select id="useCaseFilter">
+                        <option value="all">All Use Cases</option>
+                        <option value="tutoring">Tutoring & Learning Instruction</option>
+                        <option value="navigation">Navigation & Advising</option>
+                        <option value="mobility">Learner Mobility</option>
+                    </select>
+                    <select id="organizationFilter">
+                        <option value="all">All Organizations</option>
+                        <option value="Google">Google</option>
+                        <option value="Microsoft">Microsoft</option>
+                        <option value="AWS">AWS</option>
+                        <option value="OpenAI">OpenAI</option>
+                        <option value="Anthropic">Anthropic</option>
+                        <option value="Meta">Meta</option>
+                        <option value="Oracle">Oracle</option>
+                        <option value="LangChain">LangChain</option>
+                        <option value="ScaleAI">ScaleAI</option>
+                        <option value="MIT">MIT</option>
+                        <option value="EAAI">EAAI</option>
+                        <option value="AIED">AIED</option>
+                        <option value="LAK">LAK</option>
+                        <option value="EdTech Week">EdTech Week</option>
+                        <option value="ISLS">ISLS</option>
+                        <option value="EDM">EDM</option>
+                    </select>
+                    <select id="technologyFilter">
+                        <option value="all">All Technologies</option>
+                        <option value="LangChain">LangChain & LLM Apps</option>
+                        <option value="Agentic AI">Agentic AI</option>
+                        <option value="Knowledge Graphs">Knowledge Graphs</option>
+                        <option value="RAG">RAG Systems</option>
+                        <option value="AI Agents">AI Agents</option>
+                        <option value="Multimodal AI">Multimodal AI</option>
+                        <option value="AI Safety">AI Safety & Ethics</option>
+                        <option value="Model Context Protocol">MCP</option>
+                        <option value="Data Labeling">Data & Training</option>
+                        <option value="Learning Analytics">Learning Analytics</option>
+                        <option value="AI Tutoring Systems">AI Tutoring Systems</option>
+                        <option value="Personalized Learning">Personalized Learning</option>
+                        <option value="Educational Data Mining">Educational Data Mining</option>
+                        <option value="Digital Learning">Digital Learning</option>
+                        <option value="AI in Higher Education">AI in Higher Education</option>
+                        <option value="Learning Sciences">Learning Sciences</option>
+                        <option value="Digital Transformation">Digital Transformation</option>
+                    </select>
+                    <select id="sortByFilter">
+                        <option value="date">Sort by Date</option>
+                        <option value="title">Sort by Title</option>
+                        <option value="organization">Sort by Organization</option>
+                        <option value="type">Sort by Type</option>
+                        <option value="priority">Sort by Priority</option>
+                    </select>
+                </div>
+            </div>
+            <div class="events-list" id="eventsList">
+                <!-- Events will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add New Event</h2>
+                    <button id="closeModal">&times;</button>
+                </div>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Event Title *</label>
+                    <input type="text" id="eventTitle" required placeholder="e.g., AI in Education Conference 2025">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDate">Date *</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventTime">Time</label>
+                    <input type="time" id="eventTime" placeholder="e.g., 09:00">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventOrganization">Organization</label>
+                    <input type="text" id="eventOrganization" placeholder="e.g., Microsoft, Google, ISTE">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventType">Event Type</label>
+                    <select id="eventType">
+                        <option value="conference">Conference</option>
+                        <option value="summit">Summit</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="symposium">Symposium</option>
+                        <option value="research">Research Conference</option>
+                        <option value="training">Training Program</option>
+                        <option value="webinar">Webinar</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventWebsite">Website URL</label>
+                    <input type="url" id="eventWebsite" placeholder="https://www.example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventPriority">Priority</label>
+                    <select id="eventPriority">
+                        <option value="high">High</option>
+                        <option value="medium-high">Medium-High</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="medium-low">Medium-Low</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventUseCases">Use Cases (comma-separated)</label>
+                    <input type="text" id="eventUseCases" placeholder="e.g., tutoring, navigation, mobility">
+                    <small>Options: tutoring, navigation, mobility</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventTechnologies">Technologies (comma-separated)</label>
+                    <input type="text" id="eventTechnologies" placeholder="e.g., AI, Machine Learning, EdTech">
+                    <small>Examples: AI, Machine Learning, Learning Analytics, Personalized Learning</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventRelevance">Relevance Description</label>
+                    <textarea id="eventRelevance" rows="2" placeholder="Describe why this event is relevant to Gates or AI in education..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDescription">Full Description</label>
+                    <textarea id="eventDescription" rows="4" placeholder="Detailed description of the event, speakers, agenda, etc."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" id="cancelEvent">Cancel</button>
+                    <button type="submit">Add Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="eventDetailsModal" class="modal">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="eventDetailsTitle">Event Details</h2>
+                    <button id="closeDetailsModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Event details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <div class="collaboration-section">
+                        <div class="rsvp-section">
+                            <h4>RSVP for this Event</h4>
+                            <div class="rsvp-input-form">
+                                <div class="input-group">
+                                    <label for="attendeeName">Your Name:</label>
+                                    <input type="text" id="attendeeName" placeholder="Enter your full name">
+                                </div>
+                                <div class="input-group">
+                                    <label for="attendeeEmail">Email (optional):</label>
+                                    <input type="email" id="attendeeEmail" placeholder="your.email@example.com">
+                                </div>
+                                <div class="input-group">
+                                    <label for="attendeeStatus">Status:</label>
+                                    <select id="attendeeStatus">
+                                        <option value="attending">I'm Attending</option>
+                                        <option value="interested">Interested</option>
+                                        <option value="not-attending">Not Attending</option>
+                                    </select>
+                                </div>
+                                <button id="submitRSVP" class="submit-rsvp-btn">Submit RSVP</button>
+                            </div>
+                        </div>
+                        <div class="colleagues-section">
+                            <h4>Colleagues Attending</h4>
+                            <div id="colleaguesList" class="colleagues-list"></div>
+                        </div>
+                        <div class="notes-section">
+                            <h4>Collaborative Notes</h4>
+                            <textarea id="eventNotes" placeholder="Share notes, insights, or questions about this event..."></textarea>
+                            <button id="saveNotesBtn" class="save-notes-btn">Save Notes</button>
+                            <div id="notesHistory" class="notes-history"></div>
+                        </div>
+                        <div class="collaboration-history-section">
+                            <h4>Collaboration History</h4>
+                            <div id="collaborationHistory" class="collaboration-history"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Real API Validation System -->
+    <script src="api-integration.js"></script>
+    <script src="validation-system.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Initialize real API validation system
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Calendar page loaded successfully');
+            
+            // Set up API keys (in production, these would be environment variables)
+            if (typeof RealSearchAPI !== 'undefined') {
+                window.RealSearchAPI = RealSearchAPI;
+            }
+            if (typeof EventValidationAPI !== 'undefined') {
+                window.EventValidationAPI = EventValidationAPI;
+            }
+            
+            console.log('✅ Real API validation system loaded and ready');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+[
+  {
+    "query": "EdTech Week 2025 Columbia University",
+    "url": "https://www.edtechweek.com/",
+    "final_url": "https://www.edtechweek.com/",
+    "status": 200,
+    "title": "EdTech Week 2025 - New York's #1 EdTech Event | October 20-22, 2025",
+    "h1": "EDTECH WEEK 2025",
+    "date": "2025-10-20",
+    "matches": ["EdTech Week", "2025", "Columbia University", "October 20-22"]
+  },
+  {
+    "query": "ISTE International Society Technology Education conference",
+    "url": "https://www.iste.org/",
+    "final_url": "https://www.iste.org/",
+    "status": 200,
+    "title": "ISTE - International Society for Technology in Education",
+    "h1": "Empowering educators",
+    "date": null,
+    "matches": ["ISTE", "International Society", "Technology", "Education"]
+  },
+  {
+    "query": "FETC Future Education Technology Conference",
+    "url": "https://www.fetc.org/",
+    "final_url": "https://www.fetc.org/",
+    "status": 200,
+    "title": "FETC - Future of Education Technology Conference",
+    "h1": "FETC",
+    "date": null,
+    "matches": ["FETC", "Future", "Education Technology", "Conference"]
+  },
+  {
+    "query": "EDUCAUSE higher education technology",
+    "url": "https://www.educause.edu/",
+    "final_url": "https://www.educause.edu/",
+    "status": 200,
+    "title": "EDUCAUSE",
+    "h1": "Advancing higher education through technology",
+    "date": null,
+    "matches": ["EDUCAUSE", "higher education", "technology"]
+  },
+  {
+    "query": "AAAI Association Advancement Artificial Intelligence",
+    "url": "https://www.aaai.org/",
+    "final_url": "https://www.aaai.org/",
+    "status": 200,
+    "title": "AAAI - Association for the Advancement of Artificial Intelligence",
+    "h1": "Association for the Advancement of Artificial Intelligence",
+    "date": null,
+    "matches": ["AAAI", "Association", "Advancement", "Artificial Intelligence"]
+  },
+  {
+    "query": "Microsoft Ignite conference 2025",
+    "url": "https://ignite.microsoft.com/",
+    "final_url": "https://ignite.microsoft.com/",
+    "status": 200,
+    "title": "Microsoft Ignite",
+    "h1": "Microsoft Ignite",
+    "date": null,
+    "matches": ["Microsoft", "Ignite", "conference"]
+  },
+  {
+    "query": "AWS re:Invent conference",
+    "url": "https://reinvent.awsevents.com/",
+    "final_url": "https://reinvent.awsevents.com/",
+    "status": 200,
+    "title": "AWS re:Invent",
+    "h1": "AWS re:Invent",
+    "date": null,
+    "matches": ["AWS", "re:Invent", "conference"]
+  },
+  {
+    "query": "Google Cloud Next conference",
+    "url": "https://cloud.withgoogle.com/next/",
+    "final_url": "https://cloud.withgoogle.com/next/",
+    "status": 200,
+    "title": "Google Cloud Next",
+    "h1": "Google Cloud Next",
+    "date": null,
+    "matches": ["Google Cloud", "Next", "conference"]
+  },
+  {
+    "query": "Oracle CloudWorld conference",
+    "url": "https://www.oracle.com/cloudworld/",
+    "final_url": "https://www.oracle.com/cloudworld/",
+    "status": 200,
+    "title": "Oracle CloudWorld",
+    "h1": "Oracle CloudWorld",
+    "date": null,
+    "matches": ["Oracle", "CloudWorld", "conference"]
+  },
+  {
+    "query": "OpenAI events conference",
+    "url": "https://openai.com/events/",
+    "final_url": "https://openai.com/events/",
+    "status": 200,
+    "title": "Events - OpenAI",
+    "h1": "Events",
+    "date": null,
+    "matches": ["OpenAI", "events"]
+  },
+  {
+    "query": "Anthropic events conference",
+    "url": "https://www.anthropic.com/events/",
+    "final_url": "https://www.anthropic.com/events/",
+    "status": 200,
+    "title": "Events - Anthropic",
+    "h1": "Events",
+    "date": null,
+    "matches": ["Anthropic", "events"]
+  },
+  {
+    "query": "Meta AI events",
+    "url": "https://ai.meta.com/events",
+    "final_url": "https://ai.meta.com/events",
+    "status": 200,
+    "title": "Events - Meta AI",
+    "h1": "Events",
+    "date": null,
+    "matches": ["Meta", "AI", "events"]
+  },
+  {
+    "query": "Google I/O conference",
+    "url": "https://events.google.com/io",
+    "final_url": "https://events.google.com/io",
+    "status": 200,
+    "title": "Google I/O",
+    "h1": "Google I/O",
+    "date": null,
+    "matches": ["Google", "I/O", "conference"]
+  },
+  {
+    "query": "AWS events summits",
+    "url": "https://aws.amazon.com/events/summits",
+    "final_url": "https://aws.amazon.com/events/summits",
+    "status": 200,
+    "title": "AWS Events and Summits",
+    "h1": "AWS Events and Summits",
+    "date": null,
+    "matches": ["AWS", "events", "summits"]
+  },
+  {
+    "query": "LangChain documentation community",
+    "url": "https://python.langchain.com/docs/community/",
+    "final_url": "https://python.langchain.com/docs/community/",
+    "status": 200,
+    "title": "LangChain Community - LangChain Documentation",
+    "h1": "Community",
+    "date": null,
+    "matches": ["LangChain", "community", "documentation"]
+  },
+  {
+    "query": "ScaleAI data labeling platform",
+    "url": "https://scale.com/",
+    "final_url": "https://scale.com/",
+    "status": 200,
+    "title": "Scale AI - The Data Platform for AI",
+    "h1": "The Data Platform for AI",
+    "date": null,
+    "matches": ["Scale", "AI", "data platform"]
+  },
+  {
+    "query": "MIT Massachusetts Institute Technology",
+    "url": "https://www.mit.edu/",
+    "final_url": "https://www.mit.edu/",
+    "status": 200,
+    "title": "MIT - Massachusetts Institute of Technology",
+    "h1": "Massachusetts Institute of Technology",
+    "date": null,
+    "matches": ["MIT", "Massachusetts Institute", "Technology"]
+  },
+  {
+    "query": "SOLAR Society Learning Analytics Research",
+    "url": "https://www.solaresearch.org/",
+    "final_url": "https://www.solaresearch.org/",
+    "status": 200,
+    "title": "SOLAR - Society for Learning Analytics Research",
+    "h1": "Society for Learning Analytics Research",
+    "date": null,
+    "matches": ["SOLAR", "Society", "Learning Analytics", "Research"]
+  },
+  {
+    "query": "Educational Data Mining conference",
+    "url": "https://educationaldatamining.org/",
+    "final_url": "https://educationaldatamining.org/",
+    "status": 200,
+    "title": "Educational Data Mining",
+    "h1": "Educational Data Mining",
+    "date": null,
+    "matches": ["Educational Data Mining", "conference"]
+  },
+  {
+    "query": "IMS Global Learning Consortium standards",
+    "url": "https://www.imsglobal.org/",
+    "final_url": "https://www.imsglobal.org/",
+    "status": 200,
+    "title": "IMS Global Learning Consortium",
+    "h1": "IMS Global Learning Consortium",
+    "date": null,
+    "matches": ["IMS Global", "Learning Consortium", "standards"]
+  },
+  {
+    "query": "ASU GSV Summit education technology",
+    "url": "https://www.asugsvsummit.com/",
+    "final_url": "https://www.asugsvsummit.com/",
+    "status": 200,
+    "title": "ASU+GSV Summit",
+    "h1": "ASU+GSV Summit",
+    "date": null,
+    "matches": ["ASU", "GSV", "Summit", "education technology"]
+  },
+  {
+    "query": "SXSW EDU education conference",
+    "url": "https://www.sxswedu.com/",
+    "final_url": "https://www.sxswedu.com/",
+    "status": 200,
+    "title": "SXSW EDU",
+    "h1": "SXSW EDU",
+    "date": null,
+    "matches": ["SXSW", "EDU", "education", "conference"]
+  },
+  {
+    "query": "Online Learning Consortium OLC",
+    "url": "https://onlinelearningconsortium.org/",
+    "final_url": "https://onlinelearningconsortium.org/",
+    "status": 200,
+    "title": "Online Learning Consortium",
+    "h1": "Online Learning Consortium",
+    "date": null,
+    "matches": ["Online Learning", "Consortium", "OLC"]
+  },
+  {
+    "query": "AIED Artificial Intelligence Education conference",
+    "url": "https://aied2024.org/",
+    "final_url": "https://aied2024.org/",
+    "status": 200,
+    "title": "AIED 2024 - Artificial Intelligence in Education",
+    "h1": "AIED 2024",
+    "date": "2024-07-01",
+    "matches": ["AIED", "Artificial Intelligence", "Education", "2024"]
+  }
+]
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .calendar-day { border: 1px solid #ccc; padding: 10px; min-height: 50px; }
+        .event-dot { background: #4f46e5; color: white; padding: 2px 5px; margin: 2px; border-radius: 3px; font-size: 12px; }
+        .today { background: #fef3c7; }
+    </style>
+</head>
+<body>
+    <h1>Calendar Test</h1>
+    <div id="calendar-container">
+        <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+    
+    <script>
+        console.log('Test script starting...');
+        
+        class TestCalendar {
+            constructor() {
+                this.currentDate = new Date();
+                this.events = [
+                    {
+                        id: 1,
+                        title: 'Test Event Today',
+                        date: this.formatDateForInput(new Date()),
+                        time: '10:00',
+                        description: 'Test event'
+                    },
+                    {
+                        id: 2,
+                        title: 'Test Event Tomorrow',
+                        date: this.formatDateForInput(new Date(Date.now() + 24 * 60 * 60 * 1000)),
+                        time: '14:00',
+                        description: 'Test event tomorrow'
+                    }
+                ];
+                
+                console.log('Events:', this.events);
+                this.render();
+            }
+            
+            formatDateForInput(date) {
+                return date.toISOString().split('T')[0];
+            }
+            
+            render() {
+                const grid = document.getElementById('calendar-grid');
+                const year = this.currentDate.getFullYear();
+                const month = this.currentDate.getMonth();
+                
+                const firstDay = new Date(year, month, 1);
+                const startDate = new Date(firstDay);
+                startDate.setDate(startDate.getDate() - firstDay.getDay());
+                
+                grid.innerHTML = '';
+                
+                for (let i = 0; i < 42; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day';
+                    dayElement.textContent = date.getDate();
+                    
+                    if (date.getMonth() === month) {
+                        // Add events for this date
+                        const dayEvents = this.getEventsForDate(date);
+                        dayEvents.forEach(event => {
+                            const eventDot = document.createElement('div');
+                            eventDot.className = 'event-dot';
+                            eventDot.textContent = event.title;
+                            dayElement.appendChild(eventDot);
+                        });
+                    }
+                    
+                    if (this.isSameDay(date, new Date())) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    grid.appendChild(dayElement);
+                }
+            }
+            
+            getEventsForDate(date) {
+                return this.events.filter(event => {
+                    const eventDate = new Date(event.date);
+                    return this.isSameDay(eventDate, date);
+                });
+            }
+            
+            isSameDay(date1, date2) {
+                return date1.getDate() === date2.getDate() &&
+                       date1.getMonth() === date2.getMonth() &&
+                       date1.getFullYear() === date2.getFullYear();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, creating test calendar...');
+            window.testCalendar = new TestCalendar();
+        });
+    </script>
+</body>
+</html>
+
