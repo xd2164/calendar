@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar V17 Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .calendar-container { max-width: 800px; margin: 0 auto; }
+        .calendar-header { text-align: center; margin-bottom: 20px; }
+        .calendar-navigation { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: #ddd; }
+        .day-header { background: #f0f0f0; padding: 10px; text-align: center; font-weight: bold; }
+        .calendar-day { background: white; padding: 10px; min-height: 80px; border: 1px solid #ddd; }
+        .calendar-day.today { background: #e3f2fd; }
+        .event-item { background: #4CAF50; color: white; padding: 2px 4px; margin: 1px 0; font-size: 12px; border-radius: 2px; }
+        button { padding: 8px 16px; margin: 0 5px; }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>EdTech Events Calendar V17 - Test</h1>
+        </div>
+        
+        <div class="calendar-navigation">
+            <button id="prevBtn">←</button>
+            <h2 class="month-year">January 2025</h2>
+            <button id="nextBtn">→</button>
+            <button id="todayBtn">Today</button>
+        </div>
+        
+        <div class="calendar-grid" id="calendar">
+            <!-- Calendar will be generated here -->
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button id="addEventBtn">Add Event</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple test version
+        class Calendar {
+            constructor() {
+                this.currentDate = new Date();
+                this.events = [
+                    {
+                        id: 1,
+                        title: 'Test Event',
+                        date: '2025-01-15',
+                        time: '10:00',
+                        description: 'Test event',
+                        organization: 'Test Org',
+                        website: '',
+                        type: 'conference',
+                        priority: 'high',
+                        useCases: ['tutoring'],
+                        technologies: ['AI'],
+                        relevance: 'High'
+                    }
+                ];
+                this.init();
+            }
+
+            init() {
+                this.render();
+                this.attachEventListeners();
+                console.log('Test Calendar initialized');
+            }
+
+            attachEventListeners() {
+                document.getElementById('prevBtn').addEventListener('click', () => this.previousMonth());
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextMonth());
+                document.getElementById('todayBtn').addEventListener('click', () => this.goToToday());
+                document.getElementById('addEventBtn').addEventListener('click', () => this.addTestEvent());
+            }
+
+            render() {
+                this.renderCalendar();
+            }
+
+            renderCalendar() {
+                const calendar = document.getElementById('calendar');
+                const monthYear = document.querySelector('.month-year');
+                
+                const year = this.currentDate.getFullYear();
+                const month = this.currentDate.getMonth();
+                
+                monthYear.textContent = this.currentDate.toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDayOfWeek = firstDay.getDay();
+
+                let calendarHTML = '';
+                
+                // Day headers
+                const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                dayHeaders.forEach(day => {
+                    calendarHTML += `<div class="day-header">${day}</div>`;
+                });
+
+                // Calendar days
+                let day = 1;
+                for (let week = 0; week < 6; week++) {
+                    for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+                        if (week === 0 && dayOfWeek < startingDayOfWeek) {
+                            calendarHTML += '<div class="calendar-day empty"></div>';
+                        } else if (day > daysInMonth) {
+                            calendarHTML += '<div class="calendar-day empty"></div>';
+                        } else {
+                            const currentDate = new Date(year, month, day);
+                            const dayEvents = this.getEventsForDate(currentDate);
+                            const isToday = this.isToday(currentDate);
+                            
+                            calendarHTML += `
+                                <div class="calendar-day ${isToday ? 'today' : ''}">
+                                    <div style="font-weight: bold; margin-bottom: 5px;">${day}</div>
+                                    <div>
+                                        ${dayEvents.map(event => `
+                                            <div class="event-item">${event.title}</div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `;
+                            day++;
+                        }
+                    }
+                }
+
+                calendar.innerHTML = calendarHTML;
+            }
+
+            getEventsForDate(date) {
+                const dateStr = date.toISOString().split('T')[0];
+                return this.events.filter(event => event.date === dateStr);
+            }
+
+            isToday(date) {
+                const today = new Date();
+                return date.toDateString() === today.toDateString();
+            }
+
+            previousMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                this.render();
+            }
+
+            nextMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                this.render();
+            }
+
+            goToToday() {
+                this.currentDate = new Date();
+                this.render();
+            }
+
+            addTestEvent() {
+                const newEvent = {
+                    id: Date.now(),
+                    title: 'Artificial Intelligence in Measurement and Education Conference (AIME-Con)',
+                    date: '2025-01-20',
+                    time: '',
+                    description: 'AI in Education Conference',
+                    organization: 'AIME',
+                    website: '',
+                    type: 'conference',
+                    priority: 'high',
+                    useCases: ['tutoring'],
+                    technologies: ['AI in Education'],
+                    relevance: 'User-added event'
+                };
+                
+                this.events.push(newEvent);
+                this.render();
+                alert('AIME-Con event added!');
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new Calendar();
+        });
+    </script>
+</body>
+</html>
