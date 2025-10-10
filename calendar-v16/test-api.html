@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester - Calendar Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .api-url {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid #3b82f6;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .api-url input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .test-section h2 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .test-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        button.success {
+            background: #10b981;
+        }
+
+        button.danger {
+            background: #ef4444;
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #1f2937;
+            color: #10b981;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .result.error {
+            color: #ef4444;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .status.online {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.offline {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Calendar API Tester</h1>
+        
+        <div class="api-url">
+            <label for="apiUrl"><strong>API Base URL:</strong></label>
+            <input type="text" id="apiUrl" value="http://localhost:3000/api" placeholder="Enter your Railway API URL">
+            <button onclick="testConnection()" style="margin-top: 0.5rem;">Test Connection</button>
+            <div id="connectionStatus"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🏥 Health Check</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/health', 'GET')">GET /api/health</button>
+            </div>
+            <div id="result-health" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>👥 Colleagues</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/colleagues', 'GET')">GET Colleagues</button>
+                <button class="success" onclick="addTestColleague()">POST Add Colleague</button>
+            </div>
+            <div id="result-colleagues" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📅 Events</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/events', 'GET')">GET Events</button>
+                <button class="success" onclick="addTestEvent()">POST Add Event</button>
+            </div>
+            <div id="result-events" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>✅ Attendance</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/attendance/1', 'GET')">GET Attendance</button>
+                <button class="success" onclick="addTestAttendance()">POST Add Attendance</button>
+            </div>
+            <div id="result-attendance" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>⭐ Interests</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/interests/1', 'GET')">GET Interests</button>
+                <button class="success" onclick="addTestInterest()">POST Add Interest</button>
+            </div>
+            <div id="result-interests" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📝 Notes</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/notes/1', 'GET')">GET Notes</button>
+                <button class="success" onclick="addTestNote()">POST Add Note</button>
+            </div>
+            <div id="result-notes" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Collaboration Log</h2>
+            <div class="test-buttons">
+                <button onclick="testEndpoint('/collaboration-log', 'GET')">GET Activity Log</button>
+            </div>
+            <div id="result-log" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function getApiUrl() {
+            return document.getElementById('apiUrl').value.replace(/\/$/, '');
+        }
+
+        async function testConnection() {
+            const statusDiv = document.getElementById('connectionStatus');
+            try {
+                const response = await fetch(getApiUrl() + '/health');
+                const data = await response.json();
+                statusDiv.innerHTML = '<span class="status online">✓ Connected</span>';
+                statusDiv.style.marginTop = '1rem';
+            } catch (error) {
+                statusDiv.innerHTML = '<span class="status offline">✗ Connection Failed</span>';
+                statusDiv.style.marginTop = '1rem';
+            }
+        }
+
+        async function testEndpoint(endpoint, method, body = null) {
+            const sectionName = endpoint.split('/')[1] || 'health';
+            const resultDiv = document.getElementById(`result-${sectionName}`);
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Loading...';
+            resultDiv.className = 'result';
+
+            try {
+                const options = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+
+                const response = await fetch(getApiUrl() + endpoint, options);
+                const data = await response.json();
+
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                resultDiv.className = 'result';
+            } catch (error) {
+                resultDiv.textContent = 'Error: ' + error.message;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function addTestColleague() {
+            const colleague = {
+                id: Date.now(),
+                name: 'Test User ' + Math.floor(Math.random() * 1000),
+                registeredAt: new Date().toISOString()
+            };
+            await testEndpoint('/colleagues', 'POST', colleague);
+        }
+
+        async function addTestEvent() {
+            const event = {
+                id: Date.now(),
+                title: 'Test Event',
+                date: '2026-12-01',
+                time: '10:00',
+                description: 'This is a test event',
+                organization: 'Test Org',
+                website: 'https://example.com',
+                type: 'conference',
+                priority: 'high',
+                useCases: ['tutoring', 'navigation'],
+                technologies: ['AI in Education'],
+                relevance: 'Test event for API testing'
+            };
+            await testEndpoint('/events', 'POST', event);
+        }
+
+        async function addTestAttendance() {
+            const attendance = {
+                eventId: 1,
+                userId: Date.now(),
+                userName: 'Test Attendee'
+            };
+            await testEndpoint('/attendance', 'POST', attendance);
+        }
+
+        async function addTestInterest() {
+            const interest = {
+                eventId: 1,
+                userId: Date.now(),
+                userName: 'Interested User'
+            };
+            await testEndpoint('/interests', 'POST', interest);
+        }
+
+        async function addTestNote() {
+            const note = {
+                id: Date.now(),
+                eventId: 1,
+                author: 'Test Author',
+                title: 'Test Note',
+                content: 'This is a test note content',
+                type: 'general'
+            };
+            await testEndpoint('/notes', 'POST', note);
+        }
+
+        // Auto-test connection on load
+        window.addEventListener('load', testConnection);
+    </script>
+</body>
+</html>
+
+
